@@ -1,0 +1,524 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CloudBox - File Storage</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+        <h2>☁ CloudBox</h2>
+
+        <nav>
+            <a class="active" href="/">🏠 Dashboard</a>
+            <a href="#files">📁 My Files</a>
+            <a href="#upload">⬆ Upload Files</a>
+            <a href="#storage">☁ Storage</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <p>Cloud Storage</p>
+            <p>Local Storage Mode</p>
+        </div>
+
+    </div>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- HEADER -->
+        <header>
+
+            <div>
+                <h1>My Dashboard</h1>
+
+                <p>
+                    Welcome to your personal cloud storage!
+                </p>
+            </div>
+
+            <!-- PROFILE DROPDOWN -->
+            <details class="profile-menu">
+
+                <summary class="profile">
+                    {{ user_email[0]|upper }}
+                </summary>
+
+                <div class="profile-dropdown">
+
+                    <h3>My Profile</h3>
+
+                    <p>Logged in as:</p>
+
+                    <strong>{{ user_email }}</strong>
+
+                    <hr>
+<form action="{{ url_for('logout') }}" method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    <button type="submit" class="logout-link">
+        Logout
+    </button>
+</form>
+               
+
+            </div>
+
+        </details>
+
+    </header>
+
+
+        <!-- WELCOME CARD -->
+        <section class="welcome-card">
+
+            <h2>Store Your Files Safely ☁️</h2>
+
+            <p>
+                Upload, manage and download your files
+                from one place.
+            </p>
+
+        </section>
+
+
+        <!-- STORAGE SECTION -->
+        <section class="upload-section" id="storage">
+
+            <h2>Your Cloud Storage</h2>
+
+            <div class="storage-container">
+
+                <div class="storage-header">
+
+                    <div>
+                        <h3>☁ CloudBox Storage</h3>
+                        <p>Your files are stored in Supabase Cloud.</p>
+                    </div>
+
+                    <span class="storage-icon">💾</span>
+
+                </div>
+
+                <div class="storage-stats">
+
+                    <div class="storage-stat">
+                        <h2>{{ storage_used_mb }} MB</h2>
+                        <p>Storage Used</p>
+                    </div>
+
+                    <div class="storage-stat">
+                        <h2>{{ storage_remaining_mb }} MB</h2>
+                        <p>Storage Remaining</p>
+                    </div>
+
+                    <div class="storage-stat">
+                        <h2>{{ total_files }}</h2>
+                        <p>Total Files</p>
+                    </div>
+
+                </div>
+
+                <div class="storage-progress-section">
+
+                    <div class="progress-info">
+                        <span>Storage Usage</span>
+                        <strong>{{ storage_percent }}%</strong>
+                    </div>
+
+                    <div class="progress-bar">
+
+                        <div class="progress-fill"
+                             style="width: {{ storage_percent }}%;">
+                        </div>
+
+                    </div>
+
+                    <p>
+                        {{ storage_used_mb }} MB used out of
+                        {{ storage_limit_mb }} MB
+                    </p>
+
+                </div>
+
+                <div class="storage-footer">
+                    <span>Maximum file size: 5 MB</span>
+                    <span>Cloud Storage Active ☁️</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- UPLOAD SECTION -->
+        <section class="upload-section" id="upload">
+
+            <h2>Upload Your Files</h2>
+
+            <div class="upload-box">
+
+                <div class="upload-icon">
+                    ⬆
+                </div>
+
+                <h3>Select Files To Upload</h3>
+
+                <p>
+                    Supported: PDF, PNG, JPG, TXT,
+                    DOCX, XLSX, CSV
+                </p>
+
+                <!-- UPLOAD FORM -->
+                <form action="{{ url_for('upload_file') }}"
+                      method="POST"
+                      enctype="multipart/form-data">
+
+                    <!-- CSRF TOKEN INSIDE FORM -->
+                    <input type="hidden"
+                           name="csrf_token"
+                           value="{{ csrf_token() }}">
+
+                    <input
+                        type="file"
+                        name="file"
+                        id="fileInput"
+                        accept=".pdf,.png,.jpg,.jpeg,.txt,.docx,.xlsx,.csv"
+                        required
+                    >
+
+                    <br><br>
+
+                    <button type="submit">
+                        Upload File
+                    </button>
+
+                </form>
+
+                <p id="fileName">
+                    No file selected
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- FLASH MESSAGES -->
+        <section>
+
+            {% with messages = get_flashed_messages() %}
+
+                {% if messages %}
+
+                    {% for message in messages %}
+
+                        <div class="file-card">
+                            <span>ℹ️</span>
+                            <p>{{ message }}</p>
+                        </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+            {% endwith %}
+
+        </section>
+
+
+        <!-- RECENT FILES -->
+        <section class="files-section" id="files">
+
+            <h2>My Uploaded Files 📁</h2>
+
+            <!-- SEARCH AND FILTER -->
+            <div class="file-toolbar">
+
+                <input
+                    type="search"
+                    id="fileSearch"
+                    placeholder="🔍 Search your files..."
+                >
+
+                <select id="fileTypeFilter">
+                    <option value="all">All File Types</option>
+                    <option value="pdf">PDF</option>
+                    <option value="image">Images</option>
+                    <option value="document">Documents</option>
+                    <option value="text">Text Files</option>
+                    <option value="spreadsheet">Spreadsheets</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <select id="fileSort">
+                    <option value="az">Name: A to Z</option>
+                    <option value="za">Name: Z to A</option>
+                </select>
+
+            </div>
+
+
+            {% if files %}
+
+                <div class="file-list" id="fileList">
+
+                    {% for file in files %}
+
+                        <div class="file-card file-item">
+
+                            <span>📄</span>
+
+                            <div>
+                                <h4>{{ file }}</h4>
+                                <br>
+
+                                <a href="{{ url_for('download_file', filename=file) }}">
+                                    Download File ⬇
+                                </a>
+                            </div>
+
+                            <!-- DELETE FORM -->
+                            <form action="{{ url_for('delete_file', filename=file) }}"
+                                  method="POST"
+                                  onsubmit="return confirm('Are you sure you want to delete this file?');">
+
+                                <!-- CSRF TOKEN INSIDE FORM -->
+                                <input type="hidden"
+                                       name="csrf_token"
+                                       value="{{ csrf_token() }}">
+
+                                <button type="submit" class="delete-btn">
+                                    Delete
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <div id="noSearchResults" style="display:none;">
+
+                    <div class="file-card">
+                        <span>🔍</span>
+
+                        <div>
+                            <h4>No Matching Files Found</h4>
+                            <p>Try another search or filter.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            {% else %}
+
+                <div class="file-card">
+                    <span>📂</span>
+
+                    <div>
+                        <h4>No Files Uploaded Yet</h4>
+                        <p>Upload your first file to get started!</p>
+                    </div>
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer style="text-align:center; padding:25px;">
+
+            <p>
+                © 2026 CloudBox | Personal File Storage System
+            </p>
+
+        </footer>
+
+    </main>
+
+
+    <!-- FILE NAME JAVASCRIPT -->
+    <script>
+
+        const fileInput =
+            document.getElementById("fileInput");
+
+        const fileName =
+            document.getElementById("fileName");
+
+        fileInput.addEventListener("change", function() {
+
+            if (this.files.length > 0) {
+
+                fileName.textContent =
+                    "Selected: " + this.files[0].name;
+
+            } else {
+
+                fileName.textContent =
+                    "No file selected";
+
+            }
+
+        });
+
+    </script>
+
+
+    <!-- SEARCH AND FILTER JAVASCRIPT -->
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const searchInput =
+                document.getElementById("fileSearch");
+
+            const typeFilter =
+                document.getElementById("fileTypeFilter");
+
+            const sortFilter =
+                document.getElementById("fileSort");
+
+            const fileList =
+                document.getElementById("fileList");
+
+            const noResults =
+                document.getElementById("noSearchResults");
+
+
+            if (!searchInput || !typeFilter || !sortFilter || !fileList) {
+                return;
+            }
+
+
+            function getFileType(filename) {
+
+                const extension =
+                    filename.split(".").pop().toLowerCase();
+
+                if (extension === "pdf") return "pdf";
+
+                if (["png", "jpg", "jpeg"].includes(extension)) {
+                    return "image";
+                }
+
+                if (extension === "docx") return "document";
+
+                if (extension === "txt") return "text";
+
+                if (["xlsx", "csv"].includes(extension)) {
+                    return "spreadsheet";
+                }
+
+                return "other";
+
+            }
+
+
+            function filterAndSortFiles() {
+
+                const searchValue =
+                    searchInput.value.toLowerCase().trim();
+
+                const selectedType =
+                    typeFilter.value;
+
+                const sortValue =
+                    sortFilter.value;
+
+
+                const cards = Array.from(
+                    fileList.querySelectorAll(".file-item")
+                );
+
+
+                cards.sort((a, b) => {
+
+                    const nameA =
+                        a.querySelector("h4").textContent.toLowerCase();
+
+                    const nameB =
+                        b.querySelector("h4").textContent.toLowerCase();
+
+                    return sortValue === "az"
+                        ? nameA.localeCompare(nameB)
+                        : nameB.localeCompare(nameA);
+
+                });
+
+
+                cards.forEach(card => {
+
+                    const filename =
+                        card.querySelector("h4").textContent;
+
+                    const matchesSearch =
+                        filename.toLowerCase().includes(searchValue);
+
+                    const matchesType =
+                        selectedType === "all" ||
+                        getFileType(filename) === selectedType;
+
+
+                    card.style.display =
+                        matchesSearch && matchesType ? "flex" : "none";
+
+                    fileList.appendChild(card);
+
+                });
+
+
+                const visibleCount = cards.filter(
+                    card => card.style.display !== "none"
+                ).length;
+
+
+                if (noResults) {
+
+                    noResults.style.display =
+                        visibleCount === 0 ? "block" : "none";
+
+                }
+
+            }
+
+
+            searchInput.addEventListener(
+                "input",
+                filterAndSortFiles
+            );
+
+            typeFilter.addEventListener(
+                "change",
+                filterAndSortFiles
+            );
+
+            sortFilter.addEventListener(
+                "change",
+                filterAndSortFiles
+            );
+
+            filterAndSortFiles();
+
+        });
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CloudBox - Account</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="auth-container">
+
+        <h1>☁️ CloudBox</h1>
+
+        {% if page == "signup" %}
+
+            <h2>Create Account</h2>
+
+            <form method="POST"
+                  action="{{ url_for('signup') }}">
+
+                <!-- CSRF SECURITY TOKEN -->
+                <input type="hidden"
+                       name="csrf_token"
+                       value="{{ csrf_token() }}">
+
+                <input type="email"
+                       name="email"
+                       placeholder="Email address"
+                       required>
+
+                <input type="password"
+                       name="password"
+                       placeholder="Password (minimum 6 characters)"
+                       required>
+
+                <button type="submit">
+                    Sign Up
+                </button>
+
+            </form>
+
+        {% else %}
+
+            <h2>Welcome Back</h2>
+
+            <form method="POST"
+                  action="{{ url_for('login') }}">
+
+                <!-- CSRF SECURITY TOKEN -->
+                <input type="hidden"
+                       name="csrf_token"
+                       value="{{ csrf_token() }}">
+
+                <input type="email"
+                       name="email"
+                       placeholder="Email address"
+                       required>
+
+                <input type="password"
+                       name="password"
+                       placeholder="Password (minimum 6 characters)"
+                       required>
+
+                <button type="submit">
+                    Login
+                </button>
+
+            </form>
+
+        {% endif %}
+
+
+        <!-- FLASH MESSAGES -->
+        {% with messages = get_flashed_messages() %}
+
+            {% if messages %}
+
+                {% for message in messages %}
+
+                    <p class="message">
+                        {{ message }}
+                    </p>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <!-- ACCOUNT LINKS -->
+        {% if page == "signup" %}
+
+            <p>
+                Already have an account?
+                <a href="{{ url_for('login') }}">Login</a>
+            </p>
+
+        {% else %}
+
+            <p>
+                New to CloudBox?
+                <a href="{{ url_for('signup') }}">Create Account</a>
+            </p>
+
+        {% endif %}
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,632 @@
+
+/* =====================================
+   CLOUDBOX DASHBOARD DESIGN
+===================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f4f7fc;
+    color: #1e293b;
+}
+
+/* =====================================
+   SIDEBAR
+===================================== */
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #172554;
+    color: white;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 100;
+}
+
+.sidebar h2 {
+    font-size: 25px;
+    margin-bottom: 45px;
+    color: #60a5fa;
+}
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sidebar nav a {
+    color: #cbd5e1;
+    text-decoration: none;
+    padding: 14px 15px;
+    border-radius: 9px;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+    background: #2563eb;
+    color: white;
+}
+
+.sidebar-bottom {
+    border-top: 1px solid #334155;
+    padding-top: 20px;
+    color: #94a3b8;
+    font-size: 13px;
+    line-height: 2;
+}
+
+/* =====================================
+   MAIN CONTENT
+===================================== */
+
+.main-content {
+    margin-left: 250px;
+    padding: 35px 45px;
+    min-height: 100vh;
+}
+
+/* =====================================
+   HEADER
+===================================== */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 30px;
+    color: #172554;
+}
+
+header p {
+    color: #64748b;
+    margin-top: 8px;
+    font-size: 15px;
+}
+
+.profile {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #2563eb;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+/* =====================================
+   WELCOME CARD
+===================================== */
+
+.welcome-card {
+    background: linear-gradient(120deg, #2563eb, #6366f1);
+    color: white;
+    padding: 40px;
+    border-radius: 18px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+}
+
+.welcome-card h2 {
+    font-size: 27px;
+    margin-bottom: 12px;
+}
+
+.welcome-card p {
+    color: #dbeafe;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* =====================================
+   UPLOAD AND STORAGE SECTION
+===================================== */
+
+.upload-section,
+.files-section {
+    background: white;
+    padding: 28px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+}
+
+.upload-section h2,
+.files-section h2 {
+    color: #172554;
+    font-size: 21px;
+    margin-bottom: 22px;
+}
+
+/* =====================================
+   FILE CARD
+===================================== */
+
+.file-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 20px;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.file-card:hover {
+    background: #eff6ff;
+    border-color: #93c5fd;
+    transform: translateY(-2px);
+}
+
+.file-card > span {
+    font-size: 32px;
+}
+
+.file-card h4 {
+    font-size: 16px;
+    color: #1e293b;
+    overflow-wrap: anywhere;
+    margin-bottom: 7px;
+}
+
+.file-card p {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+/* =====================================
+   UPLOAD BOX
+===================================== */
+
+.upload-box {
+    border: 2px dashed #93c5fd;
+    background: #eff6ff;
+    border-radius: 15px;
+    padding: 35px 20px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.upload-box:hover {
+    border-color: #2563eb;
+    background: #f0f7ff;
+}
+
+.upload-icon {
+    font-size: 48px;
+    color: #2563eb;
+    margin-bottom: 15px;
+}
+
+.upload-box h3 {
+    font-size: 19px;
+    margin-bottom: 10px;
+    color: #1e293b;
+}
+
+.upload-box p {
+    color: #64748b;
+    font-size: 14px;
+    margin: 12px 0;
+}
+
+.upload-box input[type="file"] {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 12px;
+    background: white;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+}
+
+/* =====================================
+   UPLOAD BUTTON
+===================================== */
+
+.upload-box button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 13px 30px;
+    border-radius: 9px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.upload-box button:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+/* =====================================
+   DOWNLOAD BUTTON
+===================================== */
+
+.file-card a {
+    display: inline-block;
+    text-decoration: none;
+    background: #16a34a;
+    color: white;
+    padding: 10px 17px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.file-card a:hover {
+    background: #15803d;
+}
+
+/* =====================================
+   FLASH MESSAGES
+===================================== */
+
+.file-card p {
+    overflow-wrap: anywhere;
+}
+
+/* =====================================
+   FOOTER
+===================================== */
+
+footer {
+    color: #94a3b8;
+    font-size: 13px;
+    margin-top: 25px;
+}
+
+/* =====================================
+   RESPONSIVE DESIGN
+===================================== */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        width: 210px;
+    }
+
+    .main-content {
+        margin-left: 210px;
+        padding: 30px 25px;
+    }
+}
+
+@media (max-width: 650px) {
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        padding: 20px;
+    }
+
+    .sidebar h2 {
+        margin-bottom: 20px;
+    }
+
+    .sidebar nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .sidebar nav a {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    .sidebar-bottom {
+        display: none;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 22px 16px;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    .welcome-card {
+        padding: 25px;
+    }
+
+    .welcome-card h2 {
+        font-size: 22px;
+    }
+
+    .upload-section,
+    .files-section {
+        padding: 20px;
+    }
+
+    .file-card {
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .sidebar nav a {
+        font-size: 12px;
+        padding: 9px;
+    }
+
+    .profile {
+        width: 40px;
+        height: 40px;
+    }
+
+    .upload-box {
+        padding: 25px 12px;
+    }
+}
+.delete-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.delete-btn:hover {
+    background-color: #d93636;
+}
+
+/* Storage Dashboard */
+
+.storage-container {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    margin-top: 20px;
+}
+
+.storage-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.storage-header h3 {
+    margin-bottom: 8px;
+    color: #222;
+}
+
+.storage-header p {
+    color: #777;
+    font-size: 14px;
+}
+
+.storage-icon {
+    font-size: 35px;
+}
+
+.storage-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.storage-stat {
+    background: #f4f7ff;
+    padding: 18px;
+    border-radius: 10px;
+}
+
+.storage-stat h2 {
+    color: #2563eb;
+    font-size: 23px;
+    margin-bottom: 8px;
+}
+
+.storage-stat p {
+    color: #777;
+    font-size: 13px;
+}
+
+.storage-progress-section {
+    margin-bottom: 20px;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: #e5e7eb;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #2563eb;
+    border-radius: 20px;
+    transition: width 0.4s ease;
+}
+
+.storage-progress-section > p {
+    margin-top: 10px;
+    color: #777;
+    font-size: 13px;
+}
+
+.storage-footer {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+    color: #777;
+    font-size: 13px;
+}
+
+@media (max-width: 600px) {
+    .storage-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .storage-footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* Search and Filter */
+
+.file-toolbar {
+    display: flex;
+    gap: 12px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.file-toolbar input,
+.file-toolbar select {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+    background: white;
+}
+
+.file-toolbar input {
+    flex: 1;
+    min-width: 180px;
+}
+
+.file-toolbar select {
+    cursor: pointer;
+}
+
+.file-toolbar input:focus,
+.file-toolbar select:focus {
+    border-color: #2563eb;
+}
+
+.file-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.file-item {
+    margin-bottom: 0;
+}
+
+@media (max-width: 600px) {
+    .file-toolbar {
+        flex-direction: column;
+    }
+
+    .file-toolbar input,
+    .file-toolbar select {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+/* User Profile Menu */
+
+.profile-menu {
+    position: relative;
+    cursor: pointer;
+}
+
+.profile-menu summary {
+    list-style: none;
+}
+
+.profile-menu summary::-webkit-details-marker {
+    display: none;
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: 55px;
+    right: 0;
+    width: 250px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+    z-index: 1000;
+}
+
+.profile-dropdown h3 {
+    margin-bottom: 15px;
+}
+
+.profile-dropdown p {
+    color: #777;
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.profile-dropdown strong {
+    display: block;
+    font-size: 14px;
+    word-break: break-word;
+    margin-bottom: 15px;
+}
+
+.profile-dropdown hr {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 15px 0;
+}
+
+.logout-link {
+    display: block;
+    color: #e53935;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 0;
+}
+
+.logout-link:hover {
+    color: #b71c1c;
+}
