@@ -1,0 +1,7 @@
+
+Flask
+Flask-Session
+Flask-WTF
+supabase
+python-dotenv
+gunicorn
