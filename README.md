@@ -1,80 +1,89 @@
+# ☁️ CloudBox – Cloud-Based File Storage System
 
-# ☁️ CloudBox - Cloud File Storage
+CloudBox is a secure, web-based cloud file storage application that allows users to upload, store, download, rename, and delete their files anytime through the internet.
 
-A cloud-based file storage web application built using Python Flask and Supabase.
-
-## 🌐 Live Demo
-
-https://cloudbox-x505.onrender.com
+🌐 **Live Demo:** https://cloudbox-x505.onrender.com
 
 ## ✨ Features
 
 - User Registration and Login
 - Email Verification
-- Secure Authentication
-- Upload Files
-- Download Files
-- Delete Files
+- Secure User Authentication
+- Cloud File Upload and Download
+- Rename and Delete Files
 - Private Cloud Storage
 - User-wise File Isolation
-- Dashboard Interface
+- File Type Validation
+- Maximum 5 MB File Upload
+- Storage Management
+- User-friendly Dashboard
 
 ## 🛠️ Technologies Used
 
-- Python
-- Flask
-- HTML
-- CSS
-- Supabase
-- Git and GitHub
-- Render
+| Technology | Purpose |
+|---|---|
+| Python | Backend Programming |
+| Flask | Web Framework |
+| HTML5 | Frontend Structure |
+| CSS3 | Website Styling |
+| JavaScript | Frontend Interactions |
+| Supabase | Authentication and Cloud Storage |
+| Render | Application Deployment |
+| Git & GitHub | Version Control |
 
 ## 📂 Supported File Formats
 
 - PDF
 - PNG
-- JPG
-- JPEG
+- JPG / JPEG
 - TXT
 - DOCX
 - XLSX
 - CSV
 
-Maximum file size: 5 MB.
+**Maximum file size:** 5 MB per file.
 
 ## 🏗️ Project Architecture
 
+```text
 User
-  ↓
+  |
+  v
 CloudBox Frontend
-  ↓
+  |
+  v
 Flask Backend
-  ↓
+  |
+  v
 Supabase Authentication
-  ↓
-Supabase Cloud Storage
-
-## ⚙️ Installation
-
-### 1. Clone Repository
-
-```bash
-git clone YOUR_REPOSITORY_URL
+  |
+  v
+Supabase Private Storage
 ```
 
-### 2. Open Project Folder
+## ⚙️ Installation and Setup
+
+### 1. Clone the Repository
 
 ```bash
-cd cloudbox
+git clone YOUR_GITHUB_REPOSITORY_URL
 ```
 
-### 3. Create Virtual Environment
+### 2. Open the Project Folder
+
+```bash
+cd YOUR_PROJECT_FOLDER
+```
+
+### 3. Create a Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-### 4. Activate Environment
+### 4. Activate the Virtual Environment
+
+For Windows:
 
 ```bash
 venv\Scripts\activate
@@ -88,39 +97,56 @@ pip install -r requirements.txt
 
 ### 6. Configure Environment Variables
 
-Create a `.env` file.
+Create a `.env` file in the project root directory.
 
 ```env
 SUPABASE_URL=your_supabase_url
 SUPABASE_KEY=your_supabase_key
+FLASK_SECRET_KEY=your_secret_key
+CALLBACK_URL=http://127.0.0.1:5000/auth/callback
 ```
 
-Never upload real API keys or secrets to GitHub.
+Replace the example values with your actual configuration.
 
-### 7. Run Project
+**Important:** Never upload your actual `.env` file, API keys, or secret keys to GitHub.
+
+### 7. Run the Application
 
 ```bash
 python app.py
 ```
 
-Open http://127.0.0.1:5000
+Open your browser and visit:
 
-## 🔐 Security
+http://127.0.0.1:5000
 
-- Private Supabase Storage
-- User-wise file isolation
-- Authentication protected operations
-- Environment-based secret configuration
+## 🔐 Security Features
+
+- Supabase Private Storage Bucket
+- User-specific File Storage
+- Authentication-protected Operations
+- CSRF Protection
+- File Extension Validation
+- Environment-based Secret Configuration
 
 ## 🚀 Future Improvements
 
+- File Sharing Through Secure Links
 - Storage Usage Analytics
-- File Search
-- File Sharing
-- User Profile Management
+- Advanced File Search
+- Folder Management
+- File Preview
+- AWS S3 Integration
+- Two-Factor Authentication
 
 ## 👨‍💻 Developer
 
-CloudBox - Cloud Computing Project
+**Project:** CloudBox – Cloud-Based File Storage System
 
-Built using Python Flask and Supabase.
+**Category:** Cloud Computing / Web Development
+
+**Built With:** Python, Flask, Supabase and Render
+
+---
+
+⭐ If you find this project interesting, consider giving the repository a star!
